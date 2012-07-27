@@ -29,7 +29,10 @@ sub handle_request {
 
 		for my $note ( $xml->findnodes($xp_note) ) {
 			if (not $note->getAttribute('done')) {
-				push(@{$items->{$file}}, $note->textContent);
+				push(@{$items->{$file}}, {
+					text => $note->textContent,
+					time => $note->getAttribute('time'),
+				});
 			}
 		}
 	}
@@ -40,7 +43,7 @@ sub handle_request {
 app->config(
 	hypnotoad => {
 		accepts => 10,
-		listen => ['http://*:8094'],
+		listen => ['http://127.0.0.1:8094'],
 		pid_file => '/tmp/gtd-web.pid',
 		workers => 1,
 	},
@@ -72,7 +75,9 @@ __DATA__
 <h1><%= $file %></h1>
 <ul>
 % for my $item (@{$items->{$file}}) {
-<li><%= $item %></li>
+<li><%= $item->{text} %>
+<a class="done" href="?item=<%= $item->{time} %>&amp;action=done">done</a>
+</li>
 % }
 </ul>
 % }
