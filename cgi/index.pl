@@ -115,66 +115,15 @@ app->config(
 	},
 );
 
+app->defaults( layout => 'default' );
+
 get '/' => \&handle_request;
 
 app->start();
 
 __DATA__
 
-@@ add.html.ep
-<!DOCTYPE html>
-<html>
-<head>
-	<title>gtd-web</title>
-	<meta charset="utf-8">
-	<style type="text/css">
-
-	body {
-		font-family: Sans-Serif;
-	}
-	</style>
-</head>
-<body>
-<div>
-<%= form_for _add => begin %>
-<div>
-<%= text_field 'file' %><br/>
-<%= text_field 'data' %><br/>
-<%= submit_button 'add' %>
-</div>
-<% end %>
-</div>
-</body>
-</html>
-
-@@ edit.html.ep
-<!DOCTYPE html>
-<html>
-<head>
-	<title>gtd-web</title>
-	<meta charset="utf-8">
-	<style type="text/css">
-
-	body {
-		font-family: Sans-Serif;
-	}
-	</style>
-</head>
-<body>
-<div>
-<%= form_for _edit => begin %>
-<div>
-<%= text_field 'file' %><br/>
-<%= text_field 'item' %><br/>
-<%= text_field 'tdata' %><br/>
-<%= submit_button 'done' %>
-</div>
-<% end %>
-</div>
-</body>
-</html>
-
-@@ main.html.ep
+@@ layouts/default.html.ep
 <!DOCTYPE html>
 <html>
 <head>
@@ -203,6 +152,34 @@ __DATA__
 	</style>
 </head>
 <body>
+<%= content %>
+</body>
+</html>
+
+@@ add.html.ep
+<div>
+<%= form_for _add => begin %>
+<div>
+<%= text_field 'file' %><br/>
+<%= text_field 'data' %><br/>
+<%= submit_button 'add' %>
+</div>
+<% end %>
+</div>
+
+@@ edit.html.ep
+<div>
+<%= form_for _edit => begin %>
+<div>
+<%= text_field 'file' %><br/>
+<%= text_field 'item' %><br/>
+<%= text_field 'tdata' %><br/>
+<%= submit_button 'done' %>
+</div>
+<% end %>
+</div>
+
+@@ main.html.ep
 <div>
 % for my $file (keys %{$items}) {
 <h1><%= $file %></h1>
@@ -224,5 +201,3 @@ add
 % }
 </ul>
 </div>
-</body>
-</html>
