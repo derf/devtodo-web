@@ -83,6 +83,8 @@ get '/_add' => sub {
 
 	$xml->toFile("${prefix}/${file}", 0);
 
+	my $base = $self->req->url->clone->scheme('https')->to_string;
+	$base =~ s{_add.*}{};
 	$self->redirect_to('/')->scheme('https');
 };
 
@@ -103,7 +105,9 @@ get '/_edit' => sub {
 
 	$xml->toFile("${prefix}/${file}", 0);
 
-	$self->redirect_to('/')->scheme('https');
+	my $base = $self->req->url->clone->scheme('https')->to_string;
+	$base =~ s{_edit.*}{};
+	$self->redirect_to($base);
 };
 
 app->config(
