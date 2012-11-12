@@ -83,7 +83,7 @@ get '/_add' => sub {
 
 	$xml->toFile("${prefix}/${file}", 0);
 
-	$self->redirect_to('/');
+	$self->redirect_to('/')->scheme('https');
 };
 
 get '/_edit' => sub {
@@ -103,7 +103,7 @@ get '/_edit' => sub {
 
 	$xml->toFile("${prefix}/${file}", 0);
 
-	$self->redirect_to('/');
+	$self->redirect_to('/')->scheme('https');
 };
 
 app->config(
