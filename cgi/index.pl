@@ -83,9 +83,7 @@ get '/_add' => sub {
 
 	$xml->toFile("${prefix}/${file}", 0);
 
-	my $base = $self->req->url->clone->scheme('https')->to_string;
-	$base =~ s{_add.*}{};
-	$self->redirect_to('/')->scheme('https');
+	$self->redirect_to('/');
 };
 
 get '/_edit' => sub {
@@ -105,9 +103,7 @@ get '/_edit' => sub {
 
 	$xml->toFile("${prefix}/${file}", 0);
 
-	my $base = $self->req->url->clone->scheme('https')->to_string;
-	$base =~ s{_edit.*}{};
-	$self->redirect_to($base);
+	$self->redirect_to('/');
 };
 
 app->config(
@@ -164,7 +160,7 @@ __DATA__
 <div>
 <%= form_for _add => begin %>
 <div>
-<%= text_field 'file' %><br/>
+<%= hidden_field 'file' %>
 <%= text_field 'data' %><br/>
 <%= submit_button 'add' %>
 </div>
@@ -175,8 +171,8 @@ __DATA__
 <div>
 <%= form_for _edit => begin %>
 <div>
-<%= text_field 'file' %><br/>
-<%= text_field 'item' %><br/>
+<%= hidden_field 'file' %><br/>
+<%= hidden_field 'item' %><br/>
 <%= text_field 'tdata' %><br/>
 <%= submit_button 'done' %>
 </div>
