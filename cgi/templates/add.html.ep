@@ -1,7 +1,7 @@
 <div>
 <%= form_for _add => begin %>
 <div>
-<%= hidden_field 'file' %>
+<%= hidden_field 'file' => $self->stash('file') %>
 <%= text_field 'data' %><br/>
 <%= submit_button 'add' %>
 </div>

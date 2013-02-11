@@ -1,8 +1,8 @@
 <div>
 <%= form_for _edit => begin %>
 <div>
-<%= hidden_field 'file' %><br/>
-<%= hidden_field 'item' %><br/>
+<%= hidden_field 'file' => $self->stash('file') %>
+<%= hidden_field 'item' => $self->stash('item') %>
 <%= text_field 'tdata' %><br/>
 <%= submit_button 'done' %>
 </div>
