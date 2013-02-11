@@ -1,0 +1,10 @@
+<div>
+<%= form_for _edit => begin %>
+<div>
+<%= hidden_field 'file' %><br/>
+<%= hidden_field 'item' %><br/>
+<%= text_field 'tdata' %><br/>
+<%= submit_button 'done' %>
+</div>
+<% end %>
+</div>

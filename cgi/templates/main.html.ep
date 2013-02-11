@@ -1,0 +1,21 @@
+<div>
+% for my $file (keys %{$items}) {
+<h1><%= $file %></h1>
+<div class="add">
+<a class="add" href="?file=<%= $file %>&amp;action=add">
+<img src="add.png" alt="" />
+add
+</a>
+</div>
+<ul>
+% for my $item (@{$items->{$file}}) {
+<li>
+<a class="done" href="<%= $item->{link} %>action=done"><img src="tick.png" alt="done" /></a>
+<a cless="edit" href="<%= $item->{link} %>action=edit"><img src="edit.png" alt="edit" /></a>
+<%= $item->{text} %>
+</li>
+% }
+</ul>
+% }
+</ul>
+</div>

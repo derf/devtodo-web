@@ -1,0 +1,9 @@
+<div>
+<%= form_for _add => begin %>
+<div>
+<%= hidden_field 'file' %>
+<%= text_field 'data' %><br/>
+<%= submit_button 'add' %>
+</div>
+<% end %>
+</div>

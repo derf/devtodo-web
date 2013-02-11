@@ -120,3 +120,84 @@ app->defaults( layout => 'default' );
 get '/' => \&handle_request;
 
 app->start();
+
+__DATA__
+
+@@ layouts/default.html.ep
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gtd-web</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+
+	body {
+		font-family: Sans-Serif;
+	}
+
+	div.add {
+		margin-left: 2em;
+	}
+
+	li {
+		margin-bottom: 0.2em;
+	}
+
+	a.add,
+	a.done,
+	a.edit {
+		text-decoration: none;
+	}
+
+	</style>
+</head>
+<body>
+<%= content %>
+</body>
+</html>
+
+@@ add.html.ep
+<div>
+<%= form_for _add => begin %>
+<div>
+<%= hidden_field 'file' %>
+<%= text_field 'data' %><br/>
+<%= submit_button 'add' %>
+</div>
+<% end %>
+</div>
+
+@@ edit.html.ep
+<div>
+<%= form_for _edit => begin %>
+<div>
+<%= hidden_field 'file' %><br/>
+<%= hidden_field 'item' %><br/>
+<%= text_field 'tdata' %><br/>
+<%= submit_button 'done' %>
+</div>
+<% end %>
+</div>
+
+@@ main.html.ep
+<div>
+% for my $file (keys %{$items}) {
+<h1><%= $file %></h1>
+<div class="add">
+<a class="add" href="?file=<%= $file %>&amp;action=add">
+<img src="add.png" alt="" />
+add
+</a>
+</div>
+<ul>
+% for my $item (@{$items->{$file}}) {
+<li>
+<a class="done" href="<%= $item->{link} %>action=done"><img src="tick.png" alt="done" /></a>
+<a cless="edit" href="<%= $item->{link} %>action=edit"><img src="edit.png" alt="edit" /></a>
+<%= $item->{text} %>
+</li>
+% }
+</ul>
+% }
+</ul>
+</div>
