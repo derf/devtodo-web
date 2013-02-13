@@ -108,8 +108,7 @@ get '/_edit' => sub {
 
 app->config(
 	hypnotoad => {
-		accepts => 10,
-		listen => ['http://127.0.0.1:8094'],
+		listen => ['http://*:8094'],
 		pid_file => '/tmp/gtd-web.pid',
 		workers => 1,
 	},
